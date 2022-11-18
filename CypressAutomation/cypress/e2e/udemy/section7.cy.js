@@ -13,5 +13,14 @@ describe('Section 7: alerts, child windows, etc..', function () {
         'Hello , share this practice page and share your knowledge'
       );
     });
+
+    cy.on('window:confirm', (str) => {
+      expect(str).to.equal('Hello , Are you sure you want to confirm?');
+    });
+  });
+
+  it('multi tab workaround sample', function () {
+    // remove attribute to open in new window, then click, which will open link in same window.
+    cy.get('#opentab').invoke('removeAttr', 'target').click();
   });
 });
