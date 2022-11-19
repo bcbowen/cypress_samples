@@ -25,4 +25,19 @@ describe('Section 7: alerts, child windows, etc..', function () {
     cy.url().should('include', 'rahulshettyacademy');
     cy.go('back');
   });
+
+  it('Handling Web Tables sample', function () {
+    // test case: master selenium automation in python price should be 25
+    cy.visit('https://rahulshettyacademy.com/AutomationPractice/');
+    cy.get('tr td:nth-child(2)').each(($el, index, $list) => {
+      const text = $el.text();
+      if (text.includes('Python')) {
+        cy.get('tr td:nth-child(3)')
+          .eq(index)
+          .then(function (price) {
+            expect(price.text()).to.equal('25');
+          });
+      }
+    });
+  });
 });
