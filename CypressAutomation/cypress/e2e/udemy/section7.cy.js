@@ -22,5 +22,7 @@ describe('Section 7: alerts, child windows, etc..', function () {
   it('multi tab workaround sample', function () {
     // remove attribute to open in new window, then click, which will open link in same window.
     cy.get('#opentab').invoke('removeAttr', 'target').click();
+    cy.url().should('include', 'rahulshettyacademy');
+    cy.go('back');
   });
 });
