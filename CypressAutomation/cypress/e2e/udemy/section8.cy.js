@@ -1,30 +1,30 @@
 /// <reference types="Cypress" />
+/// <reference types="cypress-iframe" />
 
-describe('Section 7: alerts, child windows, etc..', function () {
-  it('alert and confirm sample tests', function () {
-    // alerts and confirms are automatically handled
+import 'cypress-iframe';
+
+describe('Section 8: more on frames and child windows', function () {
+  it('39: Get href attribute and navigate to url', function () {
+    // use jQuery prop() to get value of href attribute
+    // can't do this if the url link has a different domain, will error
     cy.visit('https://rahulshettyacademy.com/AutomationPractice/');
-    cy.get('#alertbtn').click();
-    cy.get('#confirmbtn').click();
-
-    // listen for browser alert event
-    cy.on('window:alert', (str) => {
-      expect(str).to.equal(
-        'Hello , share this practice page and share your knowledge'
-      );
-    });
-
-    cy.on('window:confirm', (str) => {
-      expect(str).to.equal('Hello , Are you sure you want to confirm?');
+    cy.get('#opentab').then(function (el) {
+      const url = el.prop('href');
+      cy.visit(url);
     });
   });
 
-  it('multi tab workaround sample', function () {
-    // remove attribute to open in new window, then click, which will open link in same window.
-    cy.get('#opentab').invoke('removeAttr', 'target').click();
-    cy.url().should('include', 'rahulshettyacademy');
-    cy.go('back');
+  it('40: handling frames', function () {
+    // need to install module: 'npm install -D cypress-iframe'
+    cy.visit('https://rahulshettyacademy.com/AutomationPractice/');
+    cy.frameLoaded('#courses-iframe');
+    cy.iframe().find("a[href*='mentorship']").eq(0).click();
+    cy.wait(300);
+    cy.iframe().find('h1.pricing-title').should('have.length', 2);
   });
+
+  /*
+  
 
   it('Handling Web Tables sample', function () {
     // test case: master selenium automation in python price should be 25
@@ -57,4 +57,5 @@ describe('Section 7: alerts, child windows, etc..', function () {
     cy.contains('Top').click({ force: true });
     cy.url().should('include', 'top');
   });
+  */
 });
