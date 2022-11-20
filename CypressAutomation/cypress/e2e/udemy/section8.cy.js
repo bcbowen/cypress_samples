@@ -22,40 +22,4 @@ describe('Section 8: more on frames and child windows', function () {
     cy.wait(300);
     cy.iframe().find('h1.pricing-title').should('have.length', 2);
   });
-
-  /*
-  
-
-  it('Handling Web Tables sample', function () {
-    // test case: master selenium automation in python price should be 25
-    cy.visit('https://rahulshettyacademy.com/AutomationPractice/');
-    cy.get('tr td:nth-child(2)').each(($el, index, $list) => {
-      const text = $el.text();
-      if (text.includes('Python')) {
-        cy.get('tr td:nth-child(3)')
-          .eq(index)
-          .then(function (price) {
-            expect(price.text()).to.equal('25');
-          });
-      }
-    });
-  });
-
-  it('Mouseover sample: Show element and click', function () {
-    // test case: mouseover element and click link on popup.
-    // uses jQuery invoke to call show
-    cy.visit('https://rahulshettyacademy.com/AutomationPractice/');
-    cy.get('.mouse-hover-content').invoke('show');
-    cy.contains('Top').click();
-    cy.url().should('include', 'top');
-  });
-
-  it('Mouseover sample: Test invisible element', function () {
-    // test case: click invisible element
-    // use 'force' since by default it won't be clicked
-    cy.visit('https://rahulshettyacademy.com/AutomationPractice/');
-    cy.contains('Top').click({ force: true });
-    cy.url().should('include', 'top');
-  });
-  */
 });
