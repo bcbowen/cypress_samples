@@ -1,12 +1,14 @@
 /// <reference types="Cypress" />
 
 import HomePage from './pageObjects/HomePage';
+import ProductPage from './pageObjects/ProductPage';
 
 describe('Cypress Framework, fixtures and custom commands', function () {
   beforeEach(function () {
     cy.fixture('example').then(function (data) {
       this.data = data;
       this.homePage = new HomePage();
+      this.productPage = new ProductPage();
     });
   });
 
@@ -24,7 +26,7 @@ describe('Cypress Framework, fixtures and custom commands', function () {
     this.homePage.getEntrepreneurRadio().should('be.disabled');
   });
 
-  it('47: Customized commands for code reuse', function () {
+  it('47-54: Customized commands for code reuse', function () {
     cy.visit('https://rahulshettyacademy.com/angularpractice/shop');
     // customized command in support.command.js
     // pause method to break in debug mode:
@@ -32,5 +34,17 @@ describe('Cypress Framework, fixtures and custom commands', function () {
     this.data.productName.forEach(function (name) {
       cy.selectProduct(name);
     });
+    this.productPage.getCheckoutButton().click();
+    // timeout override for current scope to allow time for drop down to populate dynamizally
+    Cypress.config('defaultCommandTimeout', 8000);
+    cy.contains('Checkout').click();
+    cy.get('#country')
+      .type('India')
+      .get('.suggestions > ul > li > a', { timeout: 10000 })
+      .dblclick();
+
+    cy.get('#checkbox2').click({ force: true });
+    cy.get('input[type="submit"]').click();
+    cy.get('.alert').should('contain.text', 'Success');
   });
 });
