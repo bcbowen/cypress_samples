@@ -14,7 +14,7 @@ describe('Checkout tests', function () {
 
 
   it('55 - 56: Dynamically total values', function () {
-    cy.visit('https://rahulshettyacademy.com/angularpractice/shop');
+    cy.visit(`${Cypress.env('url')}/angularpractice/shop`);
     // customized command in support.command.js
     // pause method to break in debug mode:
     // cy.pause();
