@@ -4,15 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules\\.bin\\cypress run", 
-    "headTest": "npm run test -- --headed", 
+    "test": "node_modules\\.bin\\cypress run",
+    "headTest": "npm run test -- --headed",
     "chromeTest": "npm run test -- --browser chrome",
-    "recordDashboardTest": "npm run test -- --record --key[key]", 
+    "recordDashboardTest": "npm run test -- --record --key[key]",
     "udemyTests": "npm run test -- --spec 'cypress/e2e/0-udemy/*'"
   },
-  "author": "",
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  },
+  "author": "Ben Bowen",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^10.11.0"
+    "cypress": "^10.11.0",
+    "cypress-cucumber-preprocessor": "^4.3.1"
   }
 }
