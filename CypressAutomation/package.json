@@ -16,7 +16,6 @@
   "author": "Ben Bowen",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^10.11.0",
-    "cypress-cucumber-preprocessor": "^4.3.1"
+    "cypress": "^10.11.0"
   }
 }
