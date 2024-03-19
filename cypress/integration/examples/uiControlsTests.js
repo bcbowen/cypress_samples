@@ -55,4 +55,19 @@ describe('Sample tests using ui controls', () => {
         }); 
        
     }); 
+
+    it('Table sample', () => {
+        cy.visit("https://www.rahulshettyacademy.com/AutomationPractice/"); 
+        // iterate through each row and get the amount from the cell next to the description
+        cy.get('tr td:nth-child(2)').each(($el, index, $list) => {
+            const text = $el.text(); 
+            if (text.includes("Python")) {
+                cy.get('tr td:nth-child(2)').eq(index).next().then((price) => {
+                    const priceText = price.text(); 
+                    expect(priceText).to.equal('25'); 
+                }); 
+            }
+        }); 
+      
+    }); 
 }); 
