@@ -1,4 +1,7 @@
 {
+  "modifyObstructiveCode": true,
+  "experimentalSourceRewriting": false,
+  "chromeWebSecurity": true,
   "devDependencies": {
     "cypress": "^13.7.0",
     "cypress-iframe": "^1.0.1"

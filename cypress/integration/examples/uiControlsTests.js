@@ -1,3 +1,5 @@
+import 'cypress-iframe';
+
 describe('Sample tests using ui controls', () => {
     it('Checkbox example', () => {
         cy.visit("https://www.rahulshettyacademy.com/AutomationPractice/"); 
@@ -69,5 +71,31 @@ describe('Sample tests using ui controls', () => {
             }
         }); 
       
+    }); 
+
+    it('Frame sample', () => {
+        cy.visit("https://www.rahulshettyacademy.com/AutomationPractice/"); 
+        cy.frameLoaded('#courses-iframe'); 
+        
+        cy.iframe().find('a[href*="mentorship"]').eq(0).click(); 
+        cy.wait(5000); 
+        cy.iframe().find("h1[class*='pricing-title']").should('have.length', 2); 
+
+        
+    }); 
+
+    it('Calendar sample', () => {
+        cy.visit("https://rahulshettyacademy.com/seleniumPractise/#/offers"); 
+        const now = new Date(); 
+        cy.get('.react-date-picker__calendar-button').click(); 
+        cy.get('.react-calendar__navigation__label').click(); 
+        cy.get('.react-calendar__navigation__label').click(); 
+        cy.contains('button', now.getFullYear()).click(); 
+        cy.get('.react-calendar__year-view__months__month').eq(now.getMonth()).click(); 
+        cy.contains("abbr", now.getDate()).click(); 
+
+        cy.get('.react-date-picker__inputGroup__month').should('have.value', now.getMonth() + 1); 
+        cy.get('.react-date-picker__inputGroup__day').should('have.value', now.getDate()); 
+        cy.get('.react-date-picker__inputGroup__year').should('have.value', now.getFullYear()); 
     }); 
 }); 
