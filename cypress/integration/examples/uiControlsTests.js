@@ -1,8 +1,15 @@
 import 'cypress-iframe';
+import HomePage from "../../support/pageObjects/HomePage";
 
 describe('Sample tests using ui controls', () => {
+    let homePage; 
+
+    beforeEach(() => {
+        homePage = new HomePage(); 
+        cy.visit(homePage.HomePageUrl); 
+    }); 
+
     it('Checkbox example', () => {
-        cy.visit("https://www.rahulshettyacademy.com/AutomationPractice/"); 
         cy.get("#checkBoxOption1").check().should('be.checked').and('have.value', 'option1'); 
         cy.get("#checkBoxOption1").uncheck().should('not.be.checked'); 
         // check multiple checkboxes: 
@@ -10,12 +17,10 @@ describe('Sample tests using ui controls', () => {
     }); 
 
     it('Dropdown example', () => {
-        cy.visit("https://www.rahulshettyacademy.com/AutomationPractice/"); 
         cy.get("select").select('option2').should('have.value', 'option2'); 
     }); 
 
     it('Editbox example', () => {
-        cy.visit("https://www.rahulshettyacademy.com/AutomationPractice/"); 
         cy.get("#autocomplete").type('Ind'); 
         cy.get('.ui-menu-item div').each(($el, index, $list) => {
             if ($el.text == 'India'){
@@ -28,7 +33,6 @@ describe('Sample tests using ui controls', () => {
     }); 
 
     it('Hide textbox sample', () => {
-        cy.visit("https://www.rahulshettyacademy.com/AutomationPractice/"); 
         cy.get('#displayed-text').should('be.visible'); 
         cy.get('#hide-textbox').click(); 
         cy.get('#displayed-text').should('not.be.visible'); 
@@ -38,13 +42,11 @@ describe('Sample tests using ui controls', () => {
     }); 
 
     it('Radio button sample', () => {
-        cy.visit("https://www.rahulshettyacademy.com/AutomationPractice/"); 
         cy.get('[value="radio2"]').check().should('be.checked'); 
        
     }); 
 
     it('Confirm sample', () => {
-        cy.visit("https://www.rahulshettyacademy.com/AutomationPractice/"); 
         cy.get('#alertbtn').click(); 
         cy.get('#confirmbtn').click(); 
         cy.on('window:alert', (str) => {
@@ -59,7 +61,6 @@ describe('Sample tests using ui controls', () => {
     }); 
 
     it('Table sample', () => {
-        cy.visit("https://www.rahulshettyacademy.com/AutomationPractice/"); 
         // iterate through each row and get the amount from the cell next to the description
         cy.get('tr td:nth-child(2)').each(($el, index, $list) => {
             const text = $el.text(); 
@@ -74,7 +75,6 @@ describe('Sample tests using ui controls', () => {
     }); 
 
     it('Frame sample', () => {
-        cy.visit("https://www.rahulshettyacademy.com/AutomationPractice/"); 
         cy.frameLoaded('#courses-iframe'); 
         
         cy.iframe().find('a[href*="mentorship"]').eq(0).click(); 
