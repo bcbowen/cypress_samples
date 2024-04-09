@@ -14,7 +14,9 @@ describe('Example of intercepting http calls for api testing', () => {
             }]
         }).as('booksReturned'); 
         cy.get("button[class='btn btn-primary']").click(); 
-        cy.wait('@booksReturned'); 
+        cy.wait('@booksReturned').then(({request, response}) => {
+            cy.get('tr').should('have.length', response.body.length + 1); 
+        }); 
         cy.get('p').should('have.text', 'Oops only 1 Book available');
     }); 
     
