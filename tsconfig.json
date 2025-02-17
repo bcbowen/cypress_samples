@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "target": "es5",
+      "lib": ["es5", "dom"],
+      "types": ["cypress", "node"]
+  },
+  "include": [
+      "**/*.ts",
+      "**/*.d.ts",
+      "cypress-config-extensions.d.ts" // Add this line
+  ]
+}

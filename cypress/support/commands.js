@@ -31,3 +31,12 @@ Cypress.Commands.add('selectProduct', (productName) => {
         
     }); 
 }); 
+
+Cypress.Commands.add('getConfig', (key) => {
+    const keys = key.split('.');
+    let value = Cypress.config();
+    keys.forEach(k => {
+        value = value[k];
+    });
+    return value;
+});

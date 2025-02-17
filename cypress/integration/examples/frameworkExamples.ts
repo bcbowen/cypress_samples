@@ -12,7 +12,12 @@ describe('Cypress Test Framework examples', () => {
     }); 
 
     it('Customer enters name and selects gender test', () => {
-        cy.log(Cypress.config().environment); 
+        cy.getConfig('environment').then((env) => {
+            cy.log(env); // Logs "QA"
+        });
+        cy.getConfig('url.automation').then((automationUrl) => {
+            cy.log(automationUrl); // Logs "QA"
+        });
         homePage.getEditBox().type(testUser.name);
         homePage.getGender().select(testUser.gender); 
         homePage.getTwoWayDataBinding().should('have.value', testUser.name); 
